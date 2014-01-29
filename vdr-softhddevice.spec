@@ -1,10 +1,10 @@
-%global commit  a45b9a3abe63ac2e3d196c0283692d1f92afe232
+%global commit  340e10a0eb66eff59581371d3bfcebb602da8046
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitdate 20140124
+%global gitdate 20140129
 
 Name:           vdr-softhddevice
 Version:        0.6.0
-Release:        9.%{gitdate}git%{shortcommit}%{?dist}
+Release:        10.%{gitdate}git%{shortcommit}%{?dist}
 Summary:        Streaming plug-in for VDR
 
 License:        AGPLv3
@@ -74,6 +74,9 @@ install -Dpm 644 %{SOURCE1} \
 %doc ChangeLog README.txt AGPL-3.0.txt
 
 %changelog
+* Wed Jan 29 2014 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-10.20140129git340e10a
+- update for new git snapshot
+
 * Fri Jan 24 2014 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-9.20140124gita45b9a3
 - update for new git snapshot
 - added gitdate
