@@ -4,7 +4,7 @@
 
 Name:           vdr-softhddevice
 Version:        0.6.0
-Release:        12.%{gitdate}git%{shortcommit}%{?dist}
+Release:        13.%{gitdate}git%{shortcommit}%{?dist}
 Summary:        Streaming plug-in for VDR
 
 License:        AGPLv3
@@ -74,6 +74,9 @@ install -Dpm 644 %{SOURCE1} \
 %doc ChangeLog README.txt AGPL-3.0.txt
 
 %changelog
+* Sat Mar 29 2014 Sérgio Basto <sergio@serjux.com> - 0.6.0-13.20140228git42bbb76
+- Rebuilt for ffmpeg-2.2
+
 * Fri Feb 28 2014 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-12.20140228git42bbb76
 - update for new git snapshot
 
