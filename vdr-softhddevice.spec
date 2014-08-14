@@ -74,7 +74,7 @@ install -Dpm 644 %{SOURCE1} \
 %doc ChangeLog README.txt AGPL-3.0.txt
 
 %changelog
-* Thu Aug 14 2014 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-15.20140813git8b7402a
+* Thu Aug 14 2014 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-16.20140813git8b7402a
 - update for new git snapshot
 
 * Wed Jun 25 2014 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-15.20140625git37f409c
