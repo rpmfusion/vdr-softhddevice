@@ -1,10 +1,10 @@
-%global commit  ac1d5250c86dc8b4bef59cc5396411788c4b04b5
+%global commit  9f134c1b6d7e4a488db9933f489ea2a56ec057b7
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitdate 20141013
+%global gitdate 20141016
 
 Name:           vdr-softhddevice
 Version:        0.6.0
-Release:        19.%{gitdate}git%{shortcommit}%{?dist}
+Release:        20.%{gitdate}git%{shortcommit}%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -74,6 +74,9 @@ install -Dpm 644 %{SOURCE1} \
 %doc ChangeLog README.txt AGPL-3.0.txt
 
 %changelog
+* Thu Oct 16 2014 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-20.20141016git9f134c1
+- update for new git snapshot
+
 * Wed Oct 15 2014 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-19.20141013gitac1d525
 - update for new git snapshot
 
