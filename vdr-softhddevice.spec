@@ -1,10 +1,10 @@
-%global commit  2ceeb6db4062ca57eaad5e25f86f68328035233c
+%global commit  1d06c5ba59ff4175b9144764f9750f9143c066fb
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitdate 20150209
+%global gitdate 20150212
 
 Name:           vdr-softhddevice
 Version:        0.6.0
-Release:        22.%{gitdate}git%{shortcommit}%{?dist}
+Release:        23.%{gitdate}git%{shortcommit}%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -60,7 +60,7 @@ for f in ChangeLog README.txt; do
 done
 
 %build
-make CFLAGS="%{optflags} -fPIC" %{?_smp_mflags}
+make CFLAGS="%{optflags} -fPIC" CXXFLAGS="%{optflags} -fPIC" %{?_smp_mflags}
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
@@ -71,9 +71,15 @@ install -Dpm 644 %{SOURCE1} \
 %files -f %{name}.lang
 %{vdr_plugindir}/libvdr-softhddevice.so.%{vdr_apiversion}
 %config(noreplace) %{_sysconfdir}/sysconfig/vdr-plugins.d/softhddevice.conf
-%doc ChangeLog README.txt AGPL-3.0.txt
+%doc ChangeLog README.txt
+%license AGPL-3.0.txt
 
 %changelog
+* Thu Feb 12 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-23.20150212git1d06c5b
+- update for new git snapshot
+- Compile with vdr 2.1.10
+- mark license files as %%license where available
+
 * Mon Feb 09 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-22.20150209git2ceeb6d
 - update for new git snapshot
 
