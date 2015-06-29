@@ -4,7 +4,7 @@
 
 Name:           vdr-softhddevice
 Version:        0.6.0
-Release:        27.%{gitdate}git%{shortcommit}%{?dist}
+Release:        28.%{gitdate}git%{shortcommit}%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -12,6 +12,10 @@ URL:            http://projects.vdr-developer.org/projects/plg-softhddevice
 Source0:        http://projects.vdr-developer.org/git/vdr-plugin-softhddevice.git/snapshot/vdr-plugin-softhddevice-%{commit}.tar.bz2
 # Configuration files for plugin parameters. These are Fedora specific and not in upstream.
 Source1:        %{name}.conf
+# http://projects.vdr-developer.org/issues/1417
+Patch0:         exit-crash.patch
+# http://projects.vdr-developer.org/issues/1916
+Patch1:         arm.patch
 
 BuildRequires:  vdr-devel >= 1.7.22
 BuildRequires:  gettext
@@ -25,6 +29,7 @@ BuildRequires:  xcb-util-wm-devel
 BuildRequires:  mesa-libGLU-devel
 BuildRequires:  mesa-libGL-devel
 Requires:       vdr(abi)%{?_isa} = %{vdr_apiversion}
+Requires:       xorg-x11-server-Xorg
 
 %description
 A software and GPU emulated HD output device plugin for VDR.
@@ -48,6 +53,8 @@ A software and GPU emulated HD output device plugin for VDR.
 
 %prep
 %setup -qn vdr-plugin-softhddevice-%{commit}
+%patch0 -p1
+%patch1 -p0
 
 # remove .git files and Gentoo files
 rm -f .indent.pro .gitignore .gitattributes
@@ -75,7 +82,12 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
-* Fri Jun 19 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-27.20150619gitf0d31ad
+* Mon Jun 29 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-28.20150619git396d5fa
+- added R xorg-x11-server-Xorg
+- added exit-crash.patch
+- added arm.patch
+
+* Fri Jun 19 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-27.20150619git396d5fa
 - update for new git snapshot
 
 * Wed Apr 22 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-26.20150422gitf0d31ad
