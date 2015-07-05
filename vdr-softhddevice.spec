@@ -4,7 +4,7 @@
 
 Name:           vdr-softhddevice
 Version:        0.6.0
-Release:        29.%{gitdate}git%{shortcommit}%{?dist}
+Release:        30.%{gitdate}git%{shortcommit}%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -15,7 +15,7 @@ Source1:        %{name}.conf
 # http://projects.vdr-developer.org/issues/1417
 Patch0:         exit-crash.patch
 # http://projects.vdr-developer.org/issues/1916
-Patch1:         arm.patch
+Patch1:         chartype.patch
 
 BuildRequires:  vdr-devel >= 1.7.22
 BuildRequires:  gettext
@@ -82,6 +82,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Sat Jul 04 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-30.20150630gitec58e45
+- renamed arm.patch to chartype.patch
+
 * Tue Jun 30 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-29.20150630gitec58e45
 - update for new git snapshot
 
