@@ -1,10 +1,10 @@
-%global commit 	ec58e456072d962a18cb50f4324d266ba4a2aae8
+%global commit 	700c8e8767e4632a63123b004c304892b31b5074
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitdate 20150630
+%global gitdate 20150810
 
 Name:           vdr-softhddevice
-Version:        0.6.0
-Release:        30.%{gitdate}git%{shortcommit}%{?dist}
+Version:        0.6.1
+Release:        1.%{gitdate}git%{shortcommit}%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -70,7 +70,7 @@ done
 make CFLAGS="%{optflags} -fPIC" CXXFLAGS="%{optflags} -fPIC" %{?_smp_mflags}
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install
 install -Dpm 644 %{SOURCE1} \
     $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/vdr-plugins.d/softhddevice.conf
 %find_lang %{name}
@@ -82,6 +82,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Fri Aug 14 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.1-1.20150810git700c8e8
+- update for new git snapshot
+
 * Sat Jul 04 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.0-30.20150630gitec58e45
 - renamed arm.patch to chartype.patch
 
