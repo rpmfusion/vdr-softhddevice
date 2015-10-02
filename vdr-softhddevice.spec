@@ -1,6 +1,6 @@
-%global commit 	f47ee3a2018e9c64927d9a5bd892e4bbc74630e8
+%global commit 	5dc5601576c617516ec41c9c4899d3e18c0cc030
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitdate 20150930
+%global gitdate 20151001
 
 Name:           vdr-softhddevice
 Version:        0.6.1
@@ -82,6 +82,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Fri Oct 02 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.1-6.20151001git5dc5601
+- update for new git snapshot
+
 * Wed Sep 30 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.1-5.20150930gitf47ee3a
 - update for new git snapshot
 
