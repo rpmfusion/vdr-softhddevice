@@ -4,7 +4,7 @@
 
 Name:           vdr-softhddevice
 Version:        0.6.1
-Release:        5.%{gitdate}git%{shortcommit}%{?dist}
+Release:        6.%{gitdate}git%{shortcommit}%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
