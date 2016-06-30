@@ -1,21 +1,23 @@
-%global commit 	ee2311d25237b9828c1423505e5d4055a836414d
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitdate 20151006
+%global commit0 6dfa88aecf1b5a4c5932ba278209d9f22676547f
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global gitdate 20151103
 
 Name:           vdr-softhddevice
 Version:        0.6.1
-Release:        7.%{gitdate}git%{shortcommit}%{?dist}
+Release:        9.%{gitdate}git%{shortcommit0}%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
 URL:            http://projects.vdr-developer.org/projects/plg-softhddevice
-Source0:        http://projects.vdr-developer.org/git/vdr-plugin-softhddevice.git/snapshot/vdr-plugin-softhddevice-%{commit}.tar.bz2
+Source0:        http://projects.vdr-developer.org/git/vdr-plugin-softhddevice.git/snapshot/vdr-plugin-softhddevice-%{commit0}.tar.bz2
 # Configuration files for plugin parameters. These are Fedora specific and not in upstream.
 Source1:        %{name}.conf
 # http://projects.vdr-developer.org/issues/1417
 Patch0:         exit-crash.patch
 # http://projects.vdr-developer.org/issues/1916
 Patch1:         chartype.patch
+# https://projects.vdr-developer.org/issues/2424
+Patch2:         ffmpeg_2.9.patch
 
 BuildRequires:  vdr-devel >= 1.7.22
 BuildRequires:  gettext
@@ -52,9 +54,10 @@ A software and GPU emulated HD output device plugin for VDR.
 
 
 %prep
-%setup -qn vdr-plugin-softhddevice-%{commit}
+%setup -qn vdr-plugin-softhddevice-%{commit0}
 %patch0 -p1
 %patch1 -p0
+%patch2 -p1
 
 # remove .git files and Gentoo files
 rm -f .indent.pro .gitignore .gitattributes
@@ -82,6 +85,12 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Tue Jun 28 2016 Martin Gansser <martinkg@fedoraproject.org> - 0.6.1-9.20151103git6dfa88a
+- Added ffmpeg_2.9.patch
+
+* Wed Nov 04 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.1-8.20151103git6dfa88a
+- update for new git snapshot
+
 * Wed Oct 07 2015 Martin Gansser <martinkg@fedoraproject.org> - 0.6.1-7.20151006gitee2311d
 - update for new git snapshot
 
