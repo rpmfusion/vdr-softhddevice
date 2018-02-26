@@ -2,9 +2,15 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gitdate 20151103
 
+%if 0%{?fedora} > 27
+%bcond_without  compat_ffmpeg
+%else
+%bcond_with     compat_ffmpeg
+%endif
+
 Name:           vdr-softhddevice
 Version:        0.6.1
-Release:        13.%{gitdate}git%{shortcommit0}%{?dist}
+Release:        14.%{gitdate}git%{shortcommit0}%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -24,7 +30,11 @@ BuildRequires:  gettext
 BuildRequires:  libva-devel
 BuildRequires:  libvdpau-devel
 BuildRequires:  alsa-lib-devel
+%if %{with compat_ffmpeg}
+BuildRequires: compat-ffmpeg28-devel
+%else
 BuildRequires:  ffmpeg-devel
+%endif
 BuildRequires:  libxcb-devel
 BuildRequires:  xcb-util-devel
 BuildRequires:  xcb-util-wm-devel
@@ -57,7 +67,9 @@ A software and GPU emulated HD output device plugin for VDR.
 %setup -qn vdr-plugin-softhddevice-%{commit0}
 %patch0 -p1
 %patch1 -p0
+%if ! %{with compat_ffmpeg}
 %patch2 -p1
+%endif
 
 # remove .git files and Gentoo files
 rm -f .indent.pro .gitignore .gitattributes
@@ -70,6 +82,9 @@ for f in ChangeLog README.txt; do
 done
 
 %build
+%if %{with compat_ffmpeg}
+export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
+%endif
 make CFLAGS="%{optflags} -fPIC" CXXFLAGS="%{optflags} -fPIC" %{?_smp_mflags}
 
 %install
@@ -85,6 +100,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Mon Feb 26 2018 Leigh Scott <leigh123linux@googlemail.com> - 0.6.1-14.20151103git6dfa88a
+- Use compat-ffmpeg28 for F28
+
 * Thu Jan 18 2018 Leigh Scott <leigh123linux@googlemail.com> - 0.6.1-13.20151103git6dfa88a
 - Rebuilt for ffmpeg-3.5 git
 
