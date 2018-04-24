@@ -10,7 +10,7 @@
 
 Name:           vdr-softhddevice
 Version:        0.6.1
-Release:        14.%{gitdate}git%{shortcommit0}%{?dist}
+Release:        15.%{gitdate}git%{shortcommit0}%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -100,6 +100,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Wed Apr 18 2018 Martin Gansser <martinkg@fedoraproject.org> - 0.6.1-15.20151103git6dfa88a
+- Rebuilt for vdr-2.4.0
+
 * Mon Feb 26 2018 Leigh Scott <leigh123linux@googlemail.com> - 0.6.1-14.20151103git6dfa88a
 - Use compat-ffmpeg28 for F28
 
