@@ -10,7 +10,7 @@
 
 Name:           vdr-softhddevice
 Version:        0.6.1
-Release:        17.%{gitdate}git%{shortcommit0}%{?dist}
+Release:        18.%{gitdate}git%{shortcommit0}%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -25,6 +25,7 @@ Patch1:         chartype.patch
 # https://projects.vdr-developer.org/issues/2424
 Patch2:         ffmpeg_2.9.patch
 
+BuildRequires:  gcc-c++
 BuildRequires:  vdr-devel >= 1.7.22
 BuildRequires:  gettext
 BuildRequires:  libva-devel
@@ -100,6 +101,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Thu Oct 11 2018 Martin Gansser <martinkg@fedoraproject.org> - 0.6.1-18.20151103git6dfa88a
+- Add BR gcc-c++
+
 * Sun Aug 19 2018 Leigh Scott <leigh123linux@googlemail.com> - 0.6.1-17.20151103git6dfa88a
 - Rebuilt for Fedora 29 Mass Rebuild binutils issue
 
