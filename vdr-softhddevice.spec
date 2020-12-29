@@ -1,29 +1,21 @@
-%global commit0 6dfa88aecf1b5a4c5932ba278209d9f22676547f
+%global commit0 057a3ab6d6ee2b1ebc4a302edf1629ba6a0377ce
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global gitdate 20151103
-
-%if 0%{?fedora} > 27
-%bcond_without  compat_ffmpeg
-%else
-%bcond_with     compat_ffmpeg
-%endif
+%global gitdate 20201226
 
 Name:           vdr-softhddevice
-Version:        0.6.1
-Release:        27.%{gitdate}git%{shortcommit0}%{?dist}
+Version:        1.0.9
+#Release:        0.1.%%{gitdate}git%%{shortcommit0}%%{?dist}
+Release:        1%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
-URL:            http://projects.vdr-developer.org/projects/plg-softhddevice
-Source0:        http://projects.vdr-developer.org/git/vdr-plugin-softhddevice.git/snapshot/vdr-plugin-softhddevice-%{commit0}.tar.bz2
+URL:            https://github.com/ua0lnj/vdr-plugin-softhddevice
+#Source0:        https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/%%{commit0}/%%{name}-%%{shortcommit0}.tar.gz
+Source0:        https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 # Configuration files for plugin parameters. These are Fedora specific and not in upstream.
 Source1:        %{name}.conf
-# http://projects.vdr-developer.org/issues/1417
+# https://github.com/ua0lnj/vdr-plugin-softhddevice/pull/33
 Patch0:         exit-crash.patch
-# http://projects.vdr-developer.org/issues/1916
-Patch1:         chartype.patch
-# https://projects.vdr-developer.org/issues/2424
-Patch2:         ffmpeg_2.9.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  vdr-devel >= 1.7.22
@@ -31,11 +23,7 @@ BuildRequires:  gettext
 BuildRequires:  libva-devel
 BuildRequires:  libvdpau-devel
 BuildRequires:  alsa-lib-devel
-%if %{with compat_ffmpeg}
-BuildRequires: compat-ffmpeg28-devel
-%else
 BuildRequires:  ffmpeg-devel
-%endif
 BuildRequires:  libxcb-devel
 BuildRequires:  xcb-util-devel
 BuildRequires:  xcb-util-wm-devel
@@ -45,10 +33,11 @@ Requires:       vdr(abi)%{?_isa} = %{vdr_apiversion}
 Requires:       xorg-x11-server-Xorg
 
 %description
-A software and GPU emulated HD output device plugin for VDR.
+A software and GPU emulated UHD output device plugin for VDR.
 
-    Video decoder CPU / VDPAU
-    Video output VDPAU
+    Video decoder CPU / VA-API / VDPAU / CUVID
+    Video output VA-API / VDPAU / GLX (VA-API / CUVID)
+    OSD accelerated by GPU VDPAU / CUVID
     Audio FFMpeg / Alsa / Analog
     Audio FFMpeg / Alsa / Digital
     Audio FFMpeg / OSS / Analog
@@ -57,20 +46,20 @@ A software and GPU emulated HD output device plugin for VDR.
     VDR ScaleVideo API
     Software deinterlacer Bob (VA-API only)
     Autocrop
-    Grab image (VDPAU only)
+    Grab image (VA-API / VDPAU / CUVID)
     Suspend / Dettach
     Letterbox, Stretch and Center cut-out video display modes
     atmo light support with plugin http://github.com/durchflieger/DFAtmo
-    PIP (Picture-in-Picture) (VDPAU only)
+    PIP (Picture-in-Picture) (VDPAU / CUVID)
 
+    planned: OSD accelerated by GPU VA-API
+    planned: Video output Opengl / Xv
+    planned: Improved software deinterlacer (yadif or/and ffmpeg filters)
+    XvBa support is no longer planned (use future Radeon UVD VDPAU)
 
 %prep
-%setup -qn vdr-plugin-softhddevice-%{commit0}
-%patch0 -p1
-%patch1 -p0
-%if ! %{with compat_ffmpeg}
-%patch2 -p1
-%endif
+#%%setup -qn vdr-plugin-softhddevice-%%{commit0}
+%autosetup -p1 -n vdr-plugin-softhddevice-%{version}
 
 # remove .git files and Gentoo files
 rm -f .indent.pro .gitignore .gitattributes
@@ -83,9 +72,6 @@ for f in ChangeLog README.txt; do
 done
 
 %build
-%if %{with compat_ffmpeg}
-export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
-%endif
 make CFLAGS="%{optflags} -fPIC" CXXFLAGS="%{optflags} -fPIC" %{?_smp_mflags}
 
 %install
@@ -101,6 +87,10 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Tue Dec 29 2020 Martin Gansser <martinkg@fedoraproject.org> - 1.0.9-1
+- Use fork because its under maintenance
+- fixes (rfbz#5882)
+
 * Wed Oct 21 2020 Martin Gansser <martinkg@fedoraproject.org> - 0.6.1-27.20151103git6dfa88a
 - Rebuilt for new VDR API version
 
