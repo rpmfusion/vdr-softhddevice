@@ -1,21 +1,13 @@
-%global commit0 057a3ab6d6ee2b1ebc4a302edf1629ba6a0377ce
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global gitdate 20201226
-
 Name:           vdr-softhddevice
-Version:        1.0.9
-#Release:        0.1.%%{gitdate}git%%{shortcommit0}%%{?dist}
-Release:        2%{?dist}
+Version:        1.0.10
+Release:        1%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
 URL:            https://github.com/ua0lnj/vdr-plugin-softhddevice
-#Source0:        https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/%%{commit0}/%%{name}-%%{shortcommit0}.tar.gz
 Source0:        https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 # Configuration files for plugin parameters. These are Fedora specific and not in upstream.
 Source1:        %{name}.conf
-# https://github.com/ua0lnj/vdr-plugin-softhddevice/pull/33
-Patch0:         exit-crash.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  vdr-devel >= 1.7.22
@@ -58,7 +50,6 @@ A software and GPU emulated UHD output device plugin for VDR.
     XvBa support is no longer planned (use future Radeon UVD VDPAU)
 
 %prep
-#%%setup -qn vdr-plugin-softhddevice-%%{commit0}
 %autosetup -p1 -n vdr-plugin-softhddevice-%{version}
 
 # remove .git files and Gentoo files
@@ -87,6 +78,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Mon Jan 04 2021 Martin Gansser <martinkg@fedoraproject.org> - 1.0.10-1
+- Update to 1.0.10
+
 * Mon Jan 04 2021 Martin Gansser <martinkg@fedoraproject.org> - 1.0.9-2
 - Rebuilt for new VDR API version
 
