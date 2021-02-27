@@ -1,5 +1,5 @@
 Name:           vdr-softhddevice
-Version:        1.0.13
+Version:        1.0.14
 Release:        1%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
@@ -63,7 +63,7 @@ for f in ChangeLog README.txt; do
 done
 
 %build
-make CFLAGS="%{optflags} -fPIC" CXXFLAGS="%{optflags} -fPIC" %{?_smp_mflags}
+%make_build CFLAGS="%{optflags} -fPIC" CXXFLAGS="%{optflags} -fPIC"
 
 %install
 %make_install
@@ -78,6 +78,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Sat Feb 27 2021 Martin Gansser <martinkg@fedoraproject.org> - 1.0.14-1
+- Update to 1.0.14
+
 * Fri Feb 12 2021 Martin Gansser <martinkg@fedoraproject.org> - 1.0.13-1
 - Update to 1.0.13
 
