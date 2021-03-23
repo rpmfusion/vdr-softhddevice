@@ -1,5 +1,5 @@
 Name:           vdr-softhddevice
-Version:        1.0.14
+Version:        1.0.15
 Release:        1%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
@@ -16,6 +16,7 @@ BuildRequires:  libva-devel
 BuildRequires:  libvdpau-devel
 BuildRequires:  alsa-lib-devel
 BuildRequires:  ffmpeg-devel
+BuildRequires:  glm-devel
 BuildRequires:  libxcb-devel
 BuildRequires:  xcb-util-devel
 BuildRequires:  xcb-util-wm-devel
@@ -78,6 +79,10 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Tue Mar 23 2021 Martin Gansser <martinkg@fedoraproject.org> - 1.0.15-1
+- Update to 1.0.15
+- Add BR glm-devel
+
 * Sat Feb 27 2021 Martin Gansser <martinkg@fedoraproject.org> - 1.0.14-1
 - Update to 1.0.14
 
