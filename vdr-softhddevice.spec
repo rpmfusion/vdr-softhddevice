@@ -1,6 +1,6 @@
 Name:           vdr-softhddevice
-Version:        1.2.5
-Release:        2%{?dist}
+Version:        1.2.7
+Release:        1%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -79,6 +79,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Sat Jan 08 2022 Martin Gansser <martinkg@fedoraproject.org> - 1.2.7-1
+- Update to 1.2.7
+
 * Thu Dec 30 2021 Martin Gansser <martinkg@fedoraproject.org> - 1.2.5-2
 - Rebuilt for new VDR API version
 
