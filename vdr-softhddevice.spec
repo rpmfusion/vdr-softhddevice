@@ -1,6 +1,9 @@
+# version we want build against
+%global vdr_version 2.6.1
+
 Name:           vdr-softhddevice
 Version:        1.2.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -10,7 +13,7 @@ Source0:        https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/v%{ver
 Source1:        %{name}.conf
 
 BuildRequires:  gcc-c++
-BuildRequires:  vdr-devel >= 1.7.22
+BuildRequires:  vdr-devel >= %{vdr_version}
 BuildRequires:  gettext
 BuildRequires:  libva-devel
 BuildRequires:  libvdpau-devel
@@ -79,6 +82,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Mon Apr 11 2022 Sérgio Basto <sergio@serjux.com> - 1.2.8-2
+- Rebuilt for VDR 2.6.1
+
 * Fri Feb 04 2022 Martin Gansser <martinkg@fedoraproject.org> - 1.2.8-1
 - Update to 1.2.8
 
