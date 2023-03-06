@@ -6,14 +6,16 @@
 
 Name:           vdr-softhddevice
 Version:        1.9.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
 URL:            https://github.com/ua0lnj/vdr-plugin-softhddevice
-Source0:        https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0:        %url/archive/v%{version}/%{name}-%{version}.tar.gz
 # Configuration files for plugin parameters. These are Fedora specific and not in upstream.
 Source1:        %{name}.conf
+# https://github.com/ua0lnj/vdr-plugin-softhddevice/commit/89fe39cd9165271abb363cbd622e3df085980d59
+Patch0:         ffmpeg6.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  vdr-devel >= %{vdr_version}
@@ -21,6 +23,7 @@ BuildRequires:  gettext
 BuildRequires:  libva-devel
 BuildRequires:  libvdpau-devel
 BuildRequires:  alsa-lib-devel
+BuildRequires:  ffmpeg
 BuildRequires:  ffmpeg-devel
 BuildRequires:  glm-devel
 BuildRequires:  libxcb-devel
@@ -85,6 +88,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Mon Mar 06 2023 Leigh Scott <leigh123linux@gmail.com> - 1.9.7-2
+- Rebuild for new ffmpeg
+
 * Thu Dec 22 2022 Martin Gansser <martinkg@fedoraproject.org> - 1.9.7-1
 - Update to 1.9.7
 
