@@ -5,7 +5,7 @@
 %endif
 
 Name:           vdr-softhddevice
-Version:        2.0.5
+Version:        2.0.6
 Release:        1%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
@@ -86,6 +86,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Sat Nov 04 2023 Martin Gansser <martinkg@fedoraproject.org> - 2.0.6-1
+- Update to 2.0.6
+
 * Mon Oct 23 2023 Martin Gansser <martinkg@fedoraproject.org> - 2.0.5-1
 - Update to 2.0.5
 
