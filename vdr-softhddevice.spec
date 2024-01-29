@@ -1,12 +1,12 @@
 # version we want build against
 %global vdr_version 2.6.3
 %if 0%{?fedora} >= 40
-%global vdr_version 2.6.5
+%global vdr_version 2.6.6
 %endif
 
 Name:           vdr-softhddevice
 Version:        2.0.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A software and GPU emulated HD output device plugin for VDR
 
 License:        AGPLv3
@@ -86,6 +86,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Fri Jan 26 2024 Martin Gansser <martinkg@fedoraproject.org> - 2.0.9-2
+- Rebuilt for new VDR API version
+
 * Mon Jan 08 2024 Martin Gansser <martinkg@fedoraproject.org> - 2.0.9-1
 - Rebuilt for new VDR API version
 - Update to 2.0.9
