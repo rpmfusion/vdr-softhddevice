@@ -5,9 +5,9 @@
 %endif
 
 Name:           vdr-softhddevice
-Version:        2.4.4
-Release:        2%{?dist}
-Summary:        A software and GPU emulated HD output device plugin for VDR
+Version:        2.4.5
+Release:        1%{?dist}
+Summary:        A software and GPU emulated UHD output device plugin for VDR
 
 License:        AGPL-3.0-only
 URL:            https://github.com/ua0lnj/vdr-plugin-softhddevice
@@ -34,10 +34,12 @@ Requires:       xorg-x11-server-Xorg
 
 %description
 A software and GPU emulated UHD output device plugin for VDR.
+Only 8-bit output now.
 
-    Video decoder CPU / VA-API / VDPAU / CUVID
-    Video output VA-API / VDPAU / GLX (VA-API / CUVID)
-    OSD accelerated by GPU VDPAU / CUVID
+    Video decoder CPU / VA-API / VDPAU / CUVID / NVDEC
+    Video output VA-API / VDPAU / GLX (VA-API / VDPAU / CUVID / NVDEC / CPU) /
+                 EGL (VA-API / CUVID / NVDEC / CPU)
+    OSD accelerated by GPU VDPAU / CUVID / NVDEC / VA-API-GLX/EGL / CPU-GLX/EGL
     Audio FFMpeg / Alsa / Analog
     Audio FFMpeg / Alsa / Digital
     Audio FFMpeg / OSS / Analog
@@ -46,16 +48,13 @@ A software and GPU emulated UHD output device plugin for VDR.
     VDR ScaleVideo API
     Software deinterlacer Bob (VA-API only)
     Autocrop
-    Grab image (VA-API / VDPAU / CUVID)
+    Grab image (VA-API / VDPAU / CUVID / NVDEC / CPU)
     Suspend / Dettach
     Letterbox, Stretch and Center cut-out video display modes
     atmo light support with plugin http://github.com/durchflieger/DFAtmo
-    PIP (Picture-in-Picture) (VDPAU / CUVID)
-
-    planned: OSD accelerated by GPU VA-API
-    planned: Video output Opengl / Xv
-    planned: Improved software deinterlacer (yadif or/and ffmpeg filters)
-    XvBa support is no longer planned (use future Radeon UVD VDPAU)
+    PIP (Picture-in-Picture) (VDPAU / CUVID / NVDEC / VA-API-GLX/EGL /
+    CPU-GLX/EGL)
+    ScreenSaver/DPMS control
 
 %prep
 %autosetup -p1 -n vdr-plugin-softhddevice-%{version}
@@ -86,6 +85,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Tue Apr 01 2025 Martin Gansser <martinkg@fedoraproject.org> - 2.4.5-1
+- Update to 2.4.5
+
 * Sun Mar 16 2025 Martin Gansser <martinkg@fedoraproject.org> - 2.4.4-2
 - Rebuilt for new VDR API version 2.7.4
 
