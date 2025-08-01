@@ -1,6 +1,6 @@
 # Set vdr_version based on Fedora version
 %if 0%{?fedora} >= 43
-%global vdr_version 2.7.6
+%global vdr_version 2.7.7
 %elif 0%{?fedora} == 42
 %global vdr_version 2.7.4
 %else
@@ -9,7 +9,7 @@
 
 Name:           vdr-softhddevice
 Version:        2.4.5
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A software and GPU emulated UHD output device plugin for VDR
 
 License:        AGPL-3.0-only
@@ -88,6 +88,9 @@ install -Dpm 644 %{SOURCE1} \
 %license AGPL-3.0.txt
 
 %changelog
+* Fri Aug 01 2025 Martin Gansser <martinkg@fedoraproject.org> - 2.4.5-5
+- Rebuilt for new VDR API version 2.7.7
+
 * Sun Jul 27 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.4.5-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_43_Mass_Rebuild
 
